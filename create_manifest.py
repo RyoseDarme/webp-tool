@@ -1,6 +1,7 @@
 """Create release metadata from the final executable, never from a guessed hash."""
 import hashlib
 import json
+import shutil
 from pathlib import Path
 from urllib.parse import quote
 from version import VERSION, REPOSITORY
@@ -9,8 +10,11 @@ from version import VERSION, REPOSITORY
 def main():
     from version import APP_NAME
     exe = Path(__file__).parent / "release" / f"{APP_NAME}_v{VERSION}.exe"
+    # GitHub normalizes non-ASCII asset filenames; publish a stable ASCII name.
+    published_name = f"WebP-Tool-v{VERSION}.exe"
+    shutil.copy2(exe, exe.parent / published_name)
     manifest = {"version": VERSION,
-                "url": f"https://github.com/{REPOSITORY}/releases/download/v{VERSION}/{quote(exe.name)}",
+                "url": f"https://github.com/{REPOSITORY}/releases/download/v{VERSION}/{published_name}",
                 "sha256": hashlib.sha256(exe.read_bytes()).hexdigest(), "size": exe.stat().st_size,
                 "notes": Path("RELEASE_NOTES.md").read_text(encoding="utf-8")}
     target = exe.parent / "latest.json"

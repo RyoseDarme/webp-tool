@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 $releaseVersion = python -c "from version import VERSION; print(VERSION)"
 $releaseRepo = python -c "from version import REPOSITORY; print(REPOSITORY)"
-$releaseName = python -c "from version import APP_NAME,VERSION; print(f'{APP_NAME}_v{VERSION}.exe')"
+$releaseName = "WebP-Tool-v$releaseVersion.exe"
 python -m pytest -q
 if ($LASTEXITCODE -ne 0) { throw 'Tests failed' }
 python build.py

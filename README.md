@@ -30,8 +30,7 @@ SHA-256 检查用于完整性验证，发布账号和 HTTPS 是更新来源的�
 ## 开发与发布
 
 ```powershell
-python -m pip install -r requirements.txt
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
 python app.py
 ```

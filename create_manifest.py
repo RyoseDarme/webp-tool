@@ -3,7 +3,6 @@ import hashlib
 import json
 import shutil
 from pathlib import Path
-from urllib.parse import quote
 from version import VERSION, REPOSITORY
 
 

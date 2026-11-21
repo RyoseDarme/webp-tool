@@ -6,18 +6,13 @@ import shutil
 import subprocess
 import sys
 
-from PIL import Image, ImageDraw
 import PySide6
 from version import VERSION, APP_NAME as PRODUCT_NAME
 
 ROOT = Path(__file__).resolve().parent
 APP_NAME = f"{PRODUCT_NAME}_v{VERSION}"
-icon = Image.new("RGBA", (256, 256), (10, 134, 116, 255))
-draw = ImageDraw.Draw(icon)
-draw.rounded_rectangle((40, 52, 216, 204), 22, fill="#ffffff")
-draw.polygon([(107, 85), (107, 171), (173, 128)], fill="#0a8674")
-draw.rounded_rectangle((49, 184, 207, 213), 8, fill="#a5e4cf")
-icon.save(ROOT / "icon.ico", sizes=[(16, 16), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
+if not (ROOT / "icon.ico").is_file():
+    raise FileNotFoundError("Missing icon.ico; do not silently replace the custom app icon.")
 
 ffmpeg = Path(shutil.which("ffmpeg")).resolve()
 ffprobe = Path(shutil.which("ffprobe")).resolve()

@@ -18,6 +18,7 @@ from converter import Cancelled, Converter, Result, cli
 from image_converter import ImageConverter, IMAGE_EXTENSIONS, convert_media
 from version import VERSION, APP_NAME
 from update_ui import UpdateDialog
+from theme import install_light_theme, POPUP_STYLE
 
 
 VIDEO_EXTENSIONS = {".mov", ".mp4", ".m4v", ".mkv", ".avi", ".webm", ".wmv", ".flv", ".mpeg", ".mpg", ".ts", ".mts", ".m2ts", ".gif", ".webp"}
@@ -504,7 +505,7 @@ class MainWindow(QMainWindow):
             event.accept()
 
 
-STYLE = """
+STYLE = POPUP_STYLE + """
 QWidget { font-family: 'Microsoft YaHei UI', 'Segoe UI'; font-size: 13px; color: #243744; }
 QMainWindow { background: #f5f7fa; }
 QLabel#title { font-size: 28px; font-weight: 700; color: #182f3a; }
@@ -540,9 +541,10 @@ def main():
     if "--convert" in sys.argv:
         return cli()
     app = QApplication(sys.argv)
+    install_light_theme(app)
+    app.setStyleSheet(STYLE)
     app.setApplicationName("视频转 WebP")
     app.setApplicationVersion(VERSION)
-    app.setStyle("Fusion")
     app.setFont(QFont("Microsoft YaHei UI", 10))
     window = MainWindow()
     window.show()

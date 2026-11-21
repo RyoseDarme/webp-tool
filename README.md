@@ -36,14 +36,14 @@ python app.py
 ```
 
 构建需要 PATH 中有 FFmpeg 和 FFprobe。执行 `python build.py`，然后 `python create_manifest.py`。
-将 EXE 和 `latest.json` 上传到同一个 GitHub Release，标签为 `v1.3.0`（后续修改 version.py）。
+将 EXE 和 `latest.json` 上传到同一个 GitHub Release，标签为 `v1.3.1`（后续修改 version.py）。
 维护版本、源代码提交和发布标签一致；首次发布前运行测试并验证打包 EXE。
 `latest.json` 的版本、URL、字节数与校验值必须与最终 EXE 一致。
 不要在源码中放入令牌、密码、Cookie 或本地用户数据。
 
 示例命令：
 ```powershell
-图片视频转WebP_v1.3.0.exe --convert "D:\image.png" "D:\video.mov" --output-dir "D:\output" --report "D:\report.json"
+图片视频转WebP_v1.3.1.exe --convert "D:\image.png" "D:\video.mov" --output-dir "D:\output" --report "D:\report.json"
 ```
 
 ## 第三方许可

@@ -30,21 +30,20 @@ SHA-256 检查用于完整性验证，发布账号和 HTTPS 是更新来源的�
 ## 开发与发布
 
 ```powershell
-python -m pip install -r requirements.txt
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
 python app.py
 ```
 
 构建需要 PATH 中有 FFmpeg 和 FFprobe。执行 `python build.py`，然后 `python create_manifest.py`。
-将 EXE 和 `latest.json` 上传到同一个 GitHub Release，标签为 `v1.3.0`（后续修改 version.py）。
+将 EXE 和 `latest.json` 上传到同一个 GitHub Release，标签为 `v1.3.1`（后续修改 version.py）。
 维护版本、源代码提交和发布标签一致；首次发布前运行测试并验证打包 EXE。
 `latest.json` 的版本、URL、字节数与校验值必须与最终 EXE 一致。
 不要在源码中放入令牌、密码、Cookie 或本地用户数据。
 
 示例命令：
 ```powershell
-图片视频转WebP_v1.3.0.exe --convert "D:\image.png" "D:\video.mov" --output-dir "D:\output" --report "D:\report.json"
+图片视频转WebP_v1.3.1.exe --convert "D:\image.png" "D:\video.mov" --output-dir "D:\output" --report "D:\report.json"
 ```
 
 ## 第三方许可
@@ -53,7 +52,13 @@ FFmpeg / PySide6 按 GPLv3 使用；Python、Pillow 许可见 licenses/。
 FFmpeg 源码及构建信息见使用说明，发行包附带第三方许可。
 
 
-# v1.3.0
+# v1.3.1
+
+- 修复 Windows 深色模式下更新弹窗、下拉菜单、说明文本出现深底深字的问题。
+- 统一浅色配色，明确文字、选中状态、输入框和菜单颜色。
+- 应用、窗口和桌面快捷方式使用用户提供的 Doro 图片图标。
+
+## v1.3 新增功能
 
 - 新增 JPG、PNG、BMP、TIFF、静态 GIF / WebP 转 WebP。
 - 默认无损保真，校验解码后像素；支持透明背景、EXIF 方向和 ICC 色彩配置。

@@ -1,0 +1,10 @@
+Video WebP Tool: GPL-3.0-or-later. Application source accompanies the release.
+FFmpeg 8.1 full build: GPLv3; build: https://www.gyan.dev/ffmpeg/builds/
+FFmpeg source: https://github.com/FFmpeg/FFmpeg/tree/n8.1
+Build recipes: https://github.com/GyanD/codexffmpeg
+PySide6 / Qt 6.11.1: used under GPLv3; dynamically loaded libraries.
+Source: https://code.qt.io/pyside/pyside-setup.git/
+Qt source: https://download.qt.io/archive/qt/6.11/6.11.1/submodules/
+Licenses: https://doc.qt.io/qtforpython-6/licenses.html
+Python: PSF license; Pillow: HPND license. See accompanying license files.
+PyInstaller bootloader: GPL with exception permitting bundled applications.

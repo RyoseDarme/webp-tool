@@ -1,0 +1,66 @@
+# 图片 / 视频转 WebP
+
+Windows 10 / 11 64 位本地桌面工具，Python + PySide6，GPL-3.0-or-later。
+素材不上传，只有手动检查更新、下载更新时联网。
+
+## 使用
+
+下载 Releases 中的 EXE，拖入图片或视频即可开始，可混合批量转换。
+
+- 图片：默认无损，保留解码后的 RGB/RGBA 像素，校验后发布。可选有损画质 95。
+- 图片：保留透明背景，校正 EXIF 旋转，保留 ICC；带 ICC 的 CMYK 转 sRGB。
+- 图片：保留原尺寸，不受视频大小限制，不覆盖原文件。
+- 高位深 / 浮点图片和多页 TIFF 拒绝转换，避免静默丢失信息。
+- GIF / WebP 动图自动进入视频动图处理流程。
+- 视频：保留原尺寸，默认小于 10 MB，质量 100 起步，最低 80，必要时降低帧率。
+- 可锁定原帧率，支持 1–8 个并行任务、进度、取消。
+- 图片输出 `原名_图片.webp`，视频输出 `原名_动图.webp`，重名自动编号。
+
+无损不能修复源图片已有噪点，且输出可能更大。图片编码阶段显示不确定进度，不伪造百分比。
+图片压缩在后台运行；压缩期间取消会在本轮原生编码结束后生效，不发布取消结果。
+
+## 在线更新
+
+点击“检查更新”，从公开 GitHub 仓库的 latest Release 读取 `latest.json`。
+界面显示版本说明，下载后校验大小与 SHA-256，再由用户选择关闭并安装。
+保留旧 EXE 为 `.previous`；复制或启动失败尝试恢复，日志在本地更新缓存旁。
+请在有写入权限的本地目录运行；下载失败可重试，也可打开版本发布页手动下载。
+SHA-256 检查用于完整性验证，发布账号和 HTTPS 是更新来源的信任基础。
+
+## 开发与发布
+
+```powershell
+python -m pip install -r requirements.txt
+python -m pip install pytest
+python -m pytest -q
+python app.py
+```
+
+构建需要 PATH 中有 FFmpeg 和 FFprobe。执行 `python build.py`，然后 `python create_manifest.py`。
+将 EXE 和 `latest.json` 上传到同一个 GitHub Release，标签为 `v1.3.0`（后续修改 version.py）。
+维护版本、源代码提交和发布标签一致；首次发布前运行测试并验证打包 EXE。
+`latest.json` 的版本、URL、字节数与校验值必须与最终 EXE 一致。
+不要在源码中放入令牌、密码、Cookie 或本地用户数据。
+
+示例命令：
+```powershell
+图片视频转WebP_v1.3.0.exe --convert "D:\image.png" "D:\video.mov" --output-dir "D:\output" --report "D:\report.json"
+```
+
+## 第三方许可
+
+FFmpeg / PySide6 按 GPLv3 使用；Python、Pillow 许可见 licenses/。
+FFmpeg 源码及构建信息见使用说明，发行包附带第三方许可。
+
+
+# v1.3.0
+
+- 新增 JPG、PNG、BMP、TIFF、静态 GIF / WebP 转 WebP。
+- 默认无损保真，校验解码后像素；支持透明背景、EXIF 方向和 ICC 色彩配置。
+- 可选高画质 95，图片不受视频大小上限限制。
+- 图片与视频可混合批量处理，保留每文件进度与耗时。
+- 保留视频原尺寸、体积控制、并行转换与取消功能。
+- 新增在线更新：检查版本、版本说明、下载进度、SHA-256 校验和关闭安装。
+- 安装更新保留上版 EXE 备份及原有参数；转换任务运行时阻止安装。
+
+无损转换不会去除原图已有噪点；高画质 95 仍为有损压缩。无损压缩体积可能大于原图。

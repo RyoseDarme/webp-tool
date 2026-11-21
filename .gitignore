@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+build/
+release/
+test-output/
+*.spec
+*.log
+*.png
+*-report.json
+*-check.json
+*.local.*
